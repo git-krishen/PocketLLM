@@ -824,8 +824,8 @@ class _HomePageState extends State<HomePage> {
 
   Future<List<ModelOption>> getModelsFromAPI(String modelLink) async {
     try {
-      final response = await http.get(Uri.http(
-        '10.0.2.2:5000',
+      final response = await http.get(Uri.https(
+        'pocket-llm.vercel.app',
         '/get-compatible-models',
         {
           'model_url' : modelLink
