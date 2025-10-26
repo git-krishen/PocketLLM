@@ -159,7 +159,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       }
                     }
                     if (mounted && link.isNotEmpty) {
-                      Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: link))
@@ -185,7 +184,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       }
                     }
                     if (mounted && link.isNotEmpty) {
-                      Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: link))
@@ -211,7 +209,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       }
                     }
                     if (mounted && link.isNotEmpty) {
-                      Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: link))
@@ -266,7 +263,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 0, bottom: 10),
-                    child: Expanded(
+                    // child: Expanded(
                       child: TextField(
                         onSubmitted: (text) => {
                           setState(() {
@@ -291,7 +288,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           )
                         ),
                       )
-                    ),
+                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsetsGeometry.only(bottom: 20),
@@ -351,7 +348,6 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                       onPressed: () {
                         if (_downloadLink.isNotEmpty && inputIsValid(_textController.text)) {
-                          Navigator.of(context).pop();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: _downloadLink))
@@ -376,8 +372,8 @@ class _WelcomePageState extends State<WelcomePage> {
 
   Future<List<ModelOption>> getModelsFromAPI(String modelLink) async {
     try {
-      final response = await http.get(Uri.http(
-        '10.0.2.2:5000',
+      final response = await http.get(Uri.https(
+        'pocket-llm.vercel.app',
         '/get-compatible-models',
         {
           'model_url' : modelLink

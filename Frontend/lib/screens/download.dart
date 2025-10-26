@@ -117,7 +117,8 @@ class _DownloadPageState extends State<DownloadPage> {
                   _preferences.setBool('setupComplete', true);
                 } else if (mounted && (status == TaskStatus.failed || status == TaskStatus.notFound)) {
                   showDialog(
-                    context: context, 
+                    context: context,
+                    barrierDismissible: false,
                     builder: (BuildContext context) {
                       return errorDialog('');
                     }
@@ -129,6 +130,7 @@ class _DownloadPageState extends State<DownloadPage> {
           if (mounted) {
             showDialog(
               context: context, 
+              barrierDismissible: false,
               builder: (BuildContext context) {
                 return errorDialog('Not enough storage to download');
               }
@@ -139,6 +141,7 @@ class _DownloadPageState extends State<DownloadPage> {
         if (mounted) {
           showDialog(
             context: context, 
+            barrierDismissible: false,
             builder: (BuildContext context) {
               return errorDialog('Invalid file path was generated.');
             }
@@ -149,6 +152,7 @@ class _DownloadPageState extends State<DownloadPage> {
       if (mounted) {
         showDialog(
           context: context, 
+          barrierDismissible: false,
           builder: (BuildContext context) {
             return errorDialog('Download encountered an ${e.runtimeType} error: $e');
           }
@@ -248,13 +252,21 @@ class _DownloadPageState extends State<DownloadPage> {
                 textAlign: TextAlign.center,
               ),
               ElevatedButton(
+                onFocusChange: (value) => () async {
+                  await _cancelDownload();
+                  if (mounted) {
+                    Navigator.popUntil(
+                      context,
+                      (Route<dynamic> route) => route.isFirst || route.settings.name == 'homepage' || route.settings.name == 'welcome',
+                    );
+                  }
+                },
                 onPressed: () async {
                   await _cancelDownload();
                   if (mounted) {
-                    Navigator.pushAndRemoveUntil(
+                    Navigator.popUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => const WelcomePage()),
-                      (Route<dynamic> route) => false
+                      (Route<dynamic> route) => route.isFirst || route.settings.name == 'homepage' || route.settings.name == 'welcome',
                     );
                   }
                 }, 

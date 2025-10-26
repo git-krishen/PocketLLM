@@ -215,7 +215,7 @@ class _HomePageState extends State<HomePage> {
       filePathToModel: modelPath,
       modelParams: modelParams,
       prompt: prompt,
-      systemPrompt: "You are a helpful assistant. Your objective is to respond to all of the user's questions in a thorough, friendly, accurate, but not overly long-winded manner.",
+      systemPrompt: "You are a helpful assistant. Your objective is to respond to all of the user's questions in a thorough, friendly, accurate, but concise manner.",
       chatHistory: chatHistory,
       onTokenGenerated: (String token) {
         if (mounted && _chats.isNotEmpty) {
@@ -323,10 +323,9 @@ class _HomePageState extends State<HomePage> {
                 child: TextButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.pushAndRemoveUntil(
+                    Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const ModelsPage()),
-                      (Route<dynamic> route) => false
                     );
                   },
                   child: const Text(
@@ -358,11 +357,6 @@ class _HomePageState extends State<HomePage> {
                 child: TextButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.pushAndRemoveUntil(
-                      context, 
-                      MaterialPageRoute(builder: (context) => const HomePage()), 
-                      (Route<dynamic> route) => false
-                    );
                   },
                   child: const Text(
                     'Home',
@@ -607,7 +601,6 @@ class _HomePageState extends State<HomePage> {
                       }
                     }
                     if (mounted && link.isNotEmpty) {
-                      Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: link))
@@ -633,7 +626,6 @@ class _HomePageState extends State<HomePage> {
                       }
                     }
                     if (mounted && link.isNotEmpty) {
-                      Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: link))
@@ -659,7 +651,6 @@ class _HomePageState extends State<HomePage> {
                       }
                     }
                     if (mounted && link.isNotEmpty) {
-                      Navigator.of(context).pop();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: link))
@@ -714,7 +705,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 0, bottom: 10),
-                    child: Expanded(
+                    // child: Expanded(
                       child: TextField(
                         onSubmitted: (text) => {
                           setState(() {
@@ -739,7 +730,7 @@ class _HomePageState extends State<HomePage> {
                           )
                         ),
                       )
-                    ),
+                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsetsGeometry.only(bottom: 20),
@@ -799,7 +790,6 @@ class _HomePageState extends State<HomePage> {
                       ),
                       onPressed: () {
                         if (_downloadLink.isNotEmpty && inputIsValid(_downloadTextController.text)) {
-                          Navigator.of(context).pop();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => DownloadPage(downloadlink: _downloadLink))

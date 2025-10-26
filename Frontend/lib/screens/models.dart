@@ -173,11 +173,6 @@ class _ModelsPageState extends State<ModelsPage> {
                 child: TextButton(
                   onPressed: () {
                     Navigator.pop(context);
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => const ModelsPage()),
-                      (Route<dynamic> route) => false
-                    );
                   },
                   child: const Text(
                     'Manage models',
@@ -497,7 +492,7 @@ class _ModelsPageState extends State<ModelsPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 0, bottom: 10),
-                    child: Expanded(
+                    // child: Expanded(
                       child: TextField(
                         onSubmitted: (text) => {
                           setState(() {
@@ -522,7 +517,7 @@ class _ModelsPageState extends State<ModelsPage> {
                           )
                         ),
                       )
-                    ),
+                    // ),
                   ),
                   Padding(
                     padding: const EdgeInsetsGeometry.only(bottom: 20),
@@ -607,8 +602,8 @@ class _ModelsPageState extends State<ModelsPage> {
 
   Future<List<ModelOption>> getModelsFromAPI(String modelLink) async {
     try {
-      final response = await http.get(Uri.http(
-        '10.0.2.2:5000',
+      final response = await http.get(Uri.https(
+        'pocket-llm.vercel.app',
         '/get-compatible-models',
         {
           'model_url' : modelLink

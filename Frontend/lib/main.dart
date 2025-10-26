@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pocket_llm/screens/download.dart';
 import 'package:pocket_llm/screens/homepage.dart';
+import 'package:pocket_llm/screens/models.dart';
 import 'package:pocket_llm/screens/welcome.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +35,11 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 18)
       ),
       home: !setupComplete ? const WelcomePage() : const HomePage(),
+      routes: {
+        '/welcome': (context) => const WelcomePage(),
+        '/homepage': (context) => const HomePage(),
+        '/models': (context) => const ModelsPage(),
+      }
     );
   }
 }
